@@ -2,6 +2,8 @@
 import { reactive,computed } from "vue";
 import Alert from "./Alert.vue";
 
+//hacemos lo mismo que en app colocamos el objeto que usaremos en un componente mas abjo aqui por que esta 
+// en una posicion mas alta
         const alert = reactive({
                     message: "",
                     type:"",
@@ -18,14 +20,15 @@ import Alert from "./Alert.vue";
         //IMPORTANTE es buena practica colocar los objetos o datos reactivo importantes en el padre y asi
         // IMPORTANTE poder pasarlos con mayor facilidad
                 
-
+// acabamos de darle un valor a este define emit para usarlo dentro del script
      const emit= defineEmits(['update:pet', 'update:propietary', 'update:email',
             'update:symptoms', 'update:high', 'save-pacient'])
 
 //tenemos que pasar las props para mandar el objeto al padre
         const props = defineProps({
-                  id: {
 
+          // creamos un id y debemos pasarle la propr de esta forma ya que en el componente padre lo declaramos como null
+                  id: {
                     type: [String,null],
             required:true,
           },
@@ -65,6 +68,7 @@ import Alert from "./Alert.vue";
                 return
 
                   } 
+                  // llamamos una funcion emit dentro de otra y la llamamos como declaramos el defineemit que esta arriba
           emit('save-pacient')
 
                   alert.message = 'pacient ok'

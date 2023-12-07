@@ -8,6 +8,9 @@ import{uid}from"uid"
 
 const pacients = ref([])
 
+// aunque este objeto es la creacion  la tiene en el form la buena practica es poder tenrlo lo mas arriba posible
+// para poder pasarlo como prop en este caso al componente form o al componente pacienbte
+
 const formPacient = reactive({
   id:null,
   pet: "",
@@ -20,24 +23,23 @@ const formPacient = reactive({
 
 
 
+// tanto el watch como el onmounted declara es exactamente igual que el proyecto de las guittarras 
+// simplemente es para guardar los datos  en el localStorage
 watch(pacients, () => {
   addLocalStorage();
 }, { deep: true });
 
-
-
 onMounted(() => {
   pacients.value=[]
-  
 
   const pacientStorage = localStorage.getItem('pacients')
-
   pacientStorage ? pacients.value = JSON.parse(pacientStorage) : console.log('vacio')
 })
 
 const addLocalStorage = () => {
   localStorage.setItem('pacients', JSON.stringify(pacients.value))
 }
+
 
 const savePacient = () => {
 
@@ -59,7 +61,7 @@ const i = pacients.value.findIndex((eachPasient)=> eachPasient.id===id)
     // symptoms: "",     
     // high: "",
           
-//esta la veo mas legible, es lo mismo 
+//esta la veo mas legible y es lo mismo 
   Object.assign(formPacient, {
     id:null,
     pet: "",
@@ -88,6 +90,10 @@ const deleted = (id) => {
   <div class="container mx-auto">
 <Header/>
 <div class="mt-12 md:flex">
+
+  <!-- en este componente (es un componente con un formulario) le estamos pasando el objeto que tenemos arriba como props  -->
+  <!-- si lo quieres pasar para utilizar en un formulario debes usar la sintasis de: -->
+   <!-- v-model:nombreDeclaradoParaElOtroComponente="objeto.valor" -->
   <Form class="  bg-slate-300 shadow-2xl rounded-xl py-10 px-5 mb-10"
   v-model:pet="formPacient.pet"
     v-model:propietary="formPacient.propietary"

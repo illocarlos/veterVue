@@ -17,7 +17,7 @@
 <template>
     
 <div
-class="mx-5 my-10 bg-slate-300 shadow-xl px-5 py-10 rounded-xl"
+class=" grid  md:grid-col-12  mx-5 my-10 bg-slate-300 shadow-xl px-5 py-10 rounded-xl"
 >
     <p
     class="font-bold mb-3 text-black uppercase"
@@ -54,16 +54,18 @@ class="mx-5 my-10 bg-slate-300 shadow-xl px-5 py-10 rounded-xl"
             >Symptoms:{{ pacient.symptoms }}
             <span class="font-normal normal-case"></span>
         </p>
-        <div class=" grid md:grid-col-12 gap-5 mt-10">
+        <div class="d-flex  flex-row gap-5 mt-10">
+
             <button
             type="button"
-            class="block w-1/2 py-2 px-10 bg-orange-400 hover:bg-orange-500 duration-500 text-white
+            class=" w-1/2  py-2  bg-orange-400 hover:bg-orange-500 duration-500 text-white
             uppercase rounded-lg font-bold"
             @click="$emit('up-date', pacient.id)"
             >edit</button>
+
                         <button
                         type="button"
-                           class="block w-1/2 py-2 px-10 bg-red-700 hover:bg-red-800 duration-500 text-white
+                           class=" w-1/2 py-2  bg-red-700 hover:bg-red-800 duration-500 text-white
                            uppercase rounded-lg font-bold"
                            @click="$emit('deleted',pacient.id)"
                         > deleted</button>
